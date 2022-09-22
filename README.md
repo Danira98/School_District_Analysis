@@ -13,7 +13,7 @@ In this project, we are instructed to use Pandas to fastrack our analysis,clean 
 ## Results:
 
 ### Code:
-In order for us to return accurate data, we first needed to clean our data of duplicates and null/missing values. We achieved this by first checking if there were any null values in our Data Frame and then remove the rows with the columns that contain those values. We do the same process with the duplicated rows. The following code shows these steps:
+In order for us to return accurate data, we needed to clean our data of duplicates and null/missing values. We achieved this by first checking if there were any null values in our Data Frame and then remove the rows with the columns that contain those values. We proceeded to do the same process with the duplicated rows. The following code shows these steps:
 
 ```
 # Check for null values
@@ -23,11 +23,24 @@ student_df.isnull()
 student_df = student_df.dropna()
 student_df.isnull().sum()
 ```
-Next
+Additionally, to get an overall view of the reading and math scores of both Charter and Public schools for all grades, we included the following code:
 
-Add stuff
+```
+# Use groupby and mean to find the average of reading and math scores for each school type
 
+school_type = student_df.groupby(["school_type"])
+school_type[['reading_score','math_score']].mean()
+```
 
+Lastly, we included a line to aggregate the data so that we group the column school type for each type of school and the grade column for all grades, and finally find the math score of each grade:
+
+```
+#use groupby and mean to find the average math score by grade for each school type
+
+type_of_school = round(student_df.groupby(["school_type","grade"]).mean(),0) #groupby can take multiple arguments
+type_of_school[["math_score"]]
+```
+All these lines of code helped us create a report with acurate data and a large overview of the scores of each group.
 ### Results:
 
 From our analysis, we could gather the following results:
